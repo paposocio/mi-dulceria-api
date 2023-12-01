@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
 const connectDB = require("./config/db");
+const cors = require('cors');
 
 //establecer configuraciones
 dotenv.config({ path: "./config/.env" });
@@ -12,6 +13,7 @@ const app = express();
 
 //dependencia formateo body del json
 app.use(express.json())
+app.use(cors({ origin: 'http://localhost:5173' }))
 
 //ejecucion conexion BD
 connectDB()
@@ -28,8 +30,8 @@ app.use("/products", productRoutes);
 const orderRoutes = require("./routes/orderRoutes.JS");
 app.use("/orders", orderRoutes);
 
-const userRoutes = require("./routes/userRoutes.JS");
-app.use("/users", userRoutes);
+const userRoutes = require("./routes/userRoutes.js");
+app.use("/auth", userRoutes);
 
 //definir puerto del server
 const puerto = process.env.PUERTO;

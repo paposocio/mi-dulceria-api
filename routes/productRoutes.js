@@ -59,7 +59,7 @@ router.get("/:id", async (request, response) => {
 });
 
 //uri de crear producto
-router.post("/", async (request, response) => {
+router.post("/register", async (request, response) => {
   try {
     //guardar Product que viene de body
     const newProduct = await Product.create(request.body);
@@ -77,7 +77,7 @@ router.post("/", async (request, response) => {
 });
 
 //actualizar producto por id
-router.put("/", async (request, response) => {
+router.put("/update/:id", async (request, response) => {
   const productid = request.params.id;
 
   if (!mongoose.Types.ObjectId.isValid(productid)) {
@@ -114,7 +114,7 @@ router.put("/", async (request, response) => {
 });
 
 //eliminar producto por id
-router.delete("/:id", async (request, response) => {
+router.delete("/delete/:id", async (request, response) => {
   const productid = request.params.id;
 
   if (!mongoose.Types.ObjectId.isValid(productid)) {
@@ -137,7 +137,7 @@ router.delete("/:id", async (request, response) => {
 
   return response.json({
     success: true,
-    message: "Usuario eliminado con id: " + productid,
+    message: "Producto eliminado con id: " + productid,
   });
 });
 
